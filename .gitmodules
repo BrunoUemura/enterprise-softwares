@@ -4,6 +4,4 @@
 [submodule "ticketr-repo/backend/ticketr-ticket-api"]
 	path = ticketr-repo/backend/ticketr-ticket-api
 	url = https://github.com/BrunoUemura/ticketr-ticket-api
-[submodule "auth-repo/enterprise-auth-api"]
-	path = auth-repo/enterprise-auth-api
-	url = https://github.com/BrunoUemura/enterprise-auth-api
+
