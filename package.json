@@ -1,0 +1,12 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "sh ./scripts/build.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

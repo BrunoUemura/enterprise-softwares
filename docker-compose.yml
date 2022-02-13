@@ -1,0 +1,87 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    build:
+      context: ./rabbitmq
+      dockerfile: ./Dockerfile
+    container_name: etprs-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - "./data/.rabbitmq_data:/var/lib/rabbitmq/mnesia"
+
+  auth-db:
+    image: postgres:latest
+    container_name: auth-db
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: etprs_auth
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/pgdata_auth:/var/lib/postgresql/data
+
+  ticketr-db:
+    image: postgres:latest
+    container_name: ticketr-db
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: etprs_ticketr
+    ports:
+      - "15432:5432"
+    volumes:
+      - ./data/pgdata_expense:/var/lib/postgresql/data
+
+  # clockin-db:
+  #   image: postgres:latest
+  #   container_name: clockin-db
+  #   environment:
+  #     POSTGRES_PASSWORD: admin
+  #     POSTGRES_USER: admin
+  #     POSTGRES_DB: etprs_clockin
+  #   ports:
+  #     - "25432:5432"
+  #   volumes:
+  #     - ./data/pgdata_watchlist:/var/lib/postgresql/data
+
+  # ms-gateway:
+  #   build:
+  #     context: ./portal-gateway-api
+  #     dockerfile: ./Dockerfile
+  #   container_name: portal-gateway-api
+  #   ports:
+  #     - "80:80"
+
+  # portal-auth-api:
+  #   build:
+  #     context: ./portal-auth-api
+  #     dockerfile: ./Dockerfile
+  #   container_name: portal-auth-api
+  #   depends_on:
+  #     - auth-database
+  #   ports:
+  #     - "5000:5000"
+
+  # ms-expenses:
+  #   build:
+  #     context: ./ms-expenses
+  #     dockerfile: ./Dockerfile
+  #   container_name: ms-expenses
+  #   depends_on:
+  #     - expenses-database
+  #   ports:
+  #     - "5001:5001"
+
+  # portal-watchlist-api:
+  #   build:
+  #     context: ./portal-watchlist-api
+  #     dockerfile: ./Dockerfile
+  #   container_name: portal-watchlist-api
+  #   depends_on:
+  #     - watchlist-database
+  #   ports:
+  #     - "5002:5002"
